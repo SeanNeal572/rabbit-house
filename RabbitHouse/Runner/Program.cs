@@ -4,23 +4,12 @@
     {
         static void Main(string[] args)
         {
-            var arrangements = new RabbitHouseParser().Parse(File.ReadAllLines("input.txt"));
+            var arrangements = new RabbitHouseParser().Parse(File.ReadAllLines("1.in"));
 
-            foreach (var arrangement in arrangements)
-            {
-                var landFiller = new LandFiller(arrangement);
-                landFiller.Fill();
+            Task.WaitAll(arrangements.Select((arrangement) => new LandFiller(arrangement).FillAsync()).ToArray());
 
-                Console.WriteLine(arrangement.IsSafe().ToString());
-                Console.WriteLine(arrangement.GetTotalAddedBlocks());
-
-                var visualizer = new Visualiser(arrangement);
-                visualizer.Visualize();
-                Console.WriteLine();
-            }
-
-
-            Console.WriteLine("Hello, World!");
+            var tester = new OutputTester("1.ans");
+            tester.VisualizeResult(arrangements);
         }
     }
 }
