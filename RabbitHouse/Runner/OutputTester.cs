@@ -18,7 +18,7 @@ namespace Runner
         {
             var lines = File.ReadAllLines(answerFilePath);
             var temp = lines.Select(line => line.Split(':')[1].Trim());
-            return temp.Select((x) => double.Parse(x)).ToArray();
+            return temp.Select(double.Parse).ToArray();
         }
 
         public void VisualizeResult(RabbitHouseArrangement[] arrangements)
