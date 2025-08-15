@@ -8,13 +8,15 @@
 
             foreach (var arrangement in arrangements)
             {
-                var heightOfCell = arrangement[0, 0];
-                arrangement.SetHeightAt(0,0, 5);
+                var landFiller = new LandFiller(arrangement);
+                landFiller.Fill();
 
-                arrangement.SetHeightAt(1, 0, 5);
-                bool isSafe = arrangement.IsSafe();
-                var changed = arrangement.GetTotalAddedBlocks();
+                Console.WriteLine(arrangement.IsSafe().ToString());
+                Console.WriteLine(arrangement.GetTotalAddedBlocks());
 
+                var visualizer = new Visualiser(arrangement);
+                visualizer.Visualize();
+                Console.WriteLine();
             }
 
 
